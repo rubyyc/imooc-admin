@@ -12,15 +12,13 @@
       </el-form-item>
       <el-form-item>
         <span class="svg-container">
-          <el-icon>
-            <Avatar />
-          </el-icon>
+          <svg-icon icon="password" />
         </span>
         <el-input placeholder="password" name="password"></el-input>
         <span class="show-pwd">
-          <el-icon>
-            <Avatar />
-          </el-icon>
+          <span class="svg-container">
+            <svg-icon icon="eye"></svg-icon>
+          </span>
         </span>
       </el-form-item>
       <el-button type="primary" style="width:100%;margin-bottom:30px;" @click="onSubmit">登录</el-button>
@@ -28,8 +26,6 @@
   </div>
 </template>
 <script setup>
-import { Avatar } from '@element-plus/icons'
-import SvgIcon from '@/components/SvgIcon/index.vue'
 import { } from 'vue'
 </script>
 <style lang="scss" scoped>
