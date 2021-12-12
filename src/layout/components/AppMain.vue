@@ -12,6 +12,5 @@ import { } from 'vue'
 	overflow: hidden;
 	padding: 61px 20px 20px 20px;
 	box-sizing: border-box;
-  background-color: pink;
 }
 </style>
