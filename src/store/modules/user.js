@@ -5,7 +5,8 @@ import {
 import md5 from 'md5'
 import {
 	setItem,
-	getItem
+	getItem,
+  removeAllItem
 } from '@/utils/storage'
 import {
 	TOKEN
@@ -46,10 +47,20 @@ export default {
 				})
 			})
 		},
+		// 获取用户信息并保存
 		async getUserInfo(context) {
 			const res = await getUserInfo()
-      this.commit('user/setUserInfo', res)
-      return res
+			this.commit('user/setUserInfo', res)
+			return res
+		},
+		// 退出登录
+		logout() {
+      this.commit('user/setToken', '')
+      this.commit('user/setUserInfo', {})
+      // 清除缓存
+      removeAllItem()
+      // TODO: 清理权限相关的
+      router.push('/login')
 		}
 	}
 }
