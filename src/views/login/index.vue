@@ -15,10 +15,10 @@
         <span class="svg-container">
           <svg-icon icon="password" />
         </span>
-        <el-input placeholder="password" name="password" v-model="loginForm.password"></el-input>
-        <span class="show-pwd">
+        <el-input placeholder="password" name="password" v-model="loginForm.password" :type="passwordType"></el-input>
+        <span class="show-pwd" @click="onChangePwdType">
           <span class="svg-container">
-            <svg-icon icon="eye"></svg-icon>
+            <svg-icon :icon="passwordType === 'password' ? 'eye' : 'eye-open'"></svg-icon>
           </span>
         </span>
       </el-form-item>
@@ -48,6 +48,15 @@ const loginRules = ref({
     validator: validatePassword()
   }]
 })
+
+const passwordType = ref('password')
+const onChangePwdType = () => {
+  if (passwordType.value === 'password') {
+    passwordType.value = 'text'
+  } else {
+    passwordType.value = 'password'
+  }
+}
 </script>
 <style lang="scss" scoped>
 $bg: #2d3a4b;
