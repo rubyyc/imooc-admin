@@ -7,7 +7,7 @@ const whiteList = ['/login']
  * 路由前置守卫
  */
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
 	// to and from are both route objects. must call `next`.
 
 	if (store.getters.token) {
@@ -15,6 +15,10 @@ router.beforeEach((to, from, next) => {
 		if (to.path === '/login') {
 			next('/')
 		} else {
+			// 判断用户资料是否存在
+			if (!store.getters.hasUserInfo) {
+				await store.dispatch('user/getUserInfo')
+			}
 			next()
 		}
 	} else {

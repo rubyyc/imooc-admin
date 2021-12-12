@@ -1,5 +1,6 @@
 import {
-	login
+	login,
+	getUserInfo
 } from '@/api/sys'
 import md5 from 'md5'
 import {
@@ -13,12 +14,16 @@ import router from '@/router'
 export default {
 	namespaced: true,
 	state: () => ({
-		token: getItem(TOKEN) || ''
+		token: getItem(TOKEN) || '',
+		userInfo: {}
 	}),
 	mutations: {
 		setToken(state, token) {
 			state.token = token
 			setItem(TOKEN, token)
+		},
+		setUserInfo(state, userInfo) {
+			state.userInfo = userInfo
 		}
 	},
 	actions: {
@@ -33,13 +38,18 @@ export default {
 					username,
 					password: md5(password)
 				}).then(data => {
-          this.commit('user/setToken', data.token)
-          router.push('/')
+					this.commit('user/setToken', data.token)
+					router.push('/')
 					resolve(data)
 				}).catch(err => {
 					reject(err)
 				})
 			})
+		},
+		async getUserInfo(context) {
+			const res = await getUserInfo()
+      this.commit('user/setUserInfo', res)
+      return res
 		}
 	}
 }

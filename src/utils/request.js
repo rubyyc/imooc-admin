@@ -1,4 +1,5 @@
 import axios from 'axios'
+import store from '@/store'
 import {
 	ElMessage
 } from 'element-plus'
@@ -9,6 +10,21 @@ const service = axios.create({
 })
 
 console.log(process.env)
+
+// 请求拦截器
+service.interceptors.request.use(
+	config => {
+		// 在这个位置需要统一的去注入token
+		if (store.getters.token) {
+			// 如果token存在 注入token
+			config.headers.Authorization = `Bearer ${store.getters.token}`
+		}
+		return config // 必须返回配置
+	},
+	error => {
+		return Promise.reject(error)
+	}
+)
 
 // 响应拦截器
 service.interceptors.response.use(
