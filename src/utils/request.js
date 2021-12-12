@@ -5,4 +5,6 @@ const service = axios.create({
 	timeout: 5000
 })
 
+console.log(process.env)
+
 export default service
