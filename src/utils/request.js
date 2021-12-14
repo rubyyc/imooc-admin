@@ -53,6 +53,9 @@ service.interceptors.response.use(
 	},
 	error => {
 		// TODO: 将来处理 token 超时问题
+		if (error.response && error.response.data && error.response.data.code === 401) {
+			store.dispatch('user/logout')
+		}
 		ElMessage.error(error.message) // 提示错误信息
 		return Promise.reject(error)
 	}

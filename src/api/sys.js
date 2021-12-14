@@ -19,4 +19,13 @@ export const login = data => {
   return request({
     url: '/sys/profile'
   })
-}
+ }
+
+ /**
+ * 退出登录
+ */
+  export const logout = () => {
+    return request({
+      url: '/sys/profile'
+    })
+  }
