@@ -1,6 +1,8 @@
 <template>
   <div class="hamburger-container" @click="toggleClick">
-    <svg-icon class="hamburger" :icon="icon"></svg-icon>
+    <span class="hamburger">
+      <svg-icon :icon="icon"></svg-icon>
+    </span>
   </div>
 </template>
 <script setup>
@@ -12,12 +14,15 @@ const icon = computed(() => {
 })
 
 const toggleClick = () => {
-  store.commit('app/triggerSidebarOpened')``
+  store.commit('app/triggerSidebarOpened')
 }
 </script>
 <style lang="scss" scoped>
 .hamburger-container {
 	padding: 0 16px;
+	display: flex;
+	// align-items: center;
+	// justify-content: center;
 	.hamburger {
 		display: inline-block;
 		vertical-align: middle;
