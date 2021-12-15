@@ -101,41 +101,39 @@ const privateRoutes = [{
 
 // 公有路由表
 const publicRoutes = [{
-		path: '/',
-		// 懒加载
-		component: () => import('@/layout/index'),
-		redirect: '/profile',
-		children: [{
-				path: 'profile',
-				name: 'profile',
-				component: () => import('@/views/profile/index'),
-				meta: {
-					title: 'profile',
-					icon: 'el-icon-user'
-				}
-			},
-			{
-				path: '/404',
-				name: '404',
-				component: () => import('@/views/error-page/404')
-			},
-			{
-				path: '/401',
-				name: '401',
-				component: () => import('@/views/error-page/401')
+	path: '/login',
+	// 懒加载
+	component: () => import('@/views/login/index')
+}, {
+	path: '/',
+	// 懒加载
+	component: layout,
+	redirect: '/profile',
+	children: [{
+			path: '/profile',
+			name: 'profile',
+			component: () => import('@/views/profile/index'),
+			meta: {
+				title: 'profile',
+				icon: 'el-icon-user'
 			}
-		]
-	},
-	{
-		path: '/login',
-		// 懒加载
-		component: () => import('@/views/login/index')
-	}
-]
+		},
+		{
+			path: '/404',
+			name: '404',
+			component: () => import('@/views/error-page/404')
+		},
+		{
+			path: '/401',
+			name: '401',
+			component: () => import('@/views/error-page/401')
+		}
+	]
+}]
 
 const router = createRouter({
 	history: createWebHashHistory(),
-	routes: [...privateRoutes, ...publicRoutes]
+	routes: [...publicRoutes, ...privateRoutes]
 })
 
 export default router

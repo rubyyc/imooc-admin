@@ -10,6 +10,7 @@ const getChildrenRoutes = routes => {
 			result.push(...route.children)
 		}
 	})
+	console.log(result)
 	return result
 }
 
@@ -44,7 +45,9 @@ export function generateMenus(routes, basePath = '') {
 	// 遍历路由表
 	routes.forEach(item => {
 		// 不存在 children && 不存在 meta 直接 return
-		if (isNull(item.meta) && isNull(item.children)) return
+		if (isNull(item.meta) && isNull(item.children)) {
+			return
+		}
 		// 存在 children 不存在 meta，进入迭代
 		if (isNull(item.meta) && !isNull(item.children)) {
 			result.push(...generateMenus(item.children))
@@ -69,9 +72,10 @@ export function generateMenus(routes, basePath = '') {
 		}
 
 		// 存在 children 进入迭代到children
-		if (item.children) {
+		if (!isNull(item.children)) {
 			route.children.push(...generateMenus(item.children, route.path))
 		}
 	})
+	console.log(result)
 	return result
 }
