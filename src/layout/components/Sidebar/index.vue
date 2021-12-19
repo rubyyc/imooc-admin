@@ -2,7 +2,7 @@
   <div>
     <div class="logo-container">
       <el-avatar :size="logoHeight" shape="square" src="https://m.imooc.com/static/wap/static/common/img/logo-small@2x.png" />
-      <h1 class="logo-title" v-if="$store.getters.sidebarOpened">{{ $t('msg.test') }}</h1>
+      <h1 class="logo-title" v-if="$store.getters.sidebarOpened">{{ $t('msg.roles.title') }}</h1>
     </div>
     <el-scrollbar>
       <sidebar-menu></sidebar-menu>
